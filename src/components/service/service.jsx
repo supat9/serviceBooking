@@ -69,7 +69,8 @@ export default function AppointmentForm() {
 
   const showPrivacyPolicy = () => {
     Swal.fire({
-      title: '<h2 style="font-size: 24px; font-weight: bold; color: #333;">นโยบายส่วนบุคคล</h2>',
+      title:
+        '<h2 style="font-size: 24px; font-weight: bold; color: #333;">นโยบายส่วนบุคคล</h2>',
       html: `
         <div style="text-align: center; font-size: 18px; line-height: 1.8; color: #555;">
           <p>เราให้ความสำคัญกับความเป็นส่วนตัวของข้อมูลลูกค้า <br>ข้อมูลที่คุณให้กับเราจะถูกนำไปใช้เพื่อให้บริการตามที่ร้องขอเท่านั้น</br></p>
@@ -82,7 +83,6 @@ export default function AppointmentForm() {
       confirmButtonColor: "#6366F1",
     });
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -123,7 +123,7 @@ export default function AppointmentForm() {
             service_status: "รอดำเนินการ", // กำหนดสถานะเริ่มต้น
             service_time: formData.appointmentTime,
             service_date: formData.appointmentDate,
-            vehicle_id: vehicleData.data.vehicle_id, // สมมติว่า API ส่งกลับ vehicle_id
+            vehicle_id: vehicleData.data.vehicle_id,
           }),
         }
       );
@@ -140,7 +140,7 @@ export default function AppointmentForm() {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             appointment_date: formData.appointmentDate,
-            service_id: serviceData.data.service_id, // สมมติว่า API ส่งกลับ service_id
+            service_id: serviceData.data.service_id,
           }),
         }
       );

@@ -130,8 +130,6 @@ export default function Track() {
                 </tbody>
               </table>
             </div>
-
-            
           </div>
         ) : (
           <div></div>

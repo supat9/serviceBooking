@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"; 
+import { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import Swal from "sweetalert2";
 
@@ -113,7 +113,9 @@ export default function Nav() {
               to="/#home"
               onClick={handleLinkClick}
               className={`text-white block font-bold ${
-                activeSection === "home" ? "text-orange-400" : "hover:text-orange-400"
+                activeSection === "home"
+                  ? "text-orange-400"
+                  : "hover:text-orange-400"
               }`}
             >
               Home
@@ -125,7 +127,9 @@ export default function Nav() {
               to="/#news"
               onClick={handleLinkClick}
               className={`text-white block font-bold ${
-                activeSection === "news" ? "text-orange-400" : "hover:text-orange-400"
+                activeSection === "news"
+                  ? "text-orange-400"
+                  : "hover:text-orange-400"
               }`}
             >
               News
@@ -137,7 +141,9 @@ export default function Nav() {
               to="/#contact"
               onClick={handleLinkClick}
               className={`text-white block font-bold ${
-                activeSection === "contact" ? "text-orange-400" : "hover:text-orange-400"
+                activeSection === "contact"
+                  ? "text-orange-400"
+                  : "hover:text-orange-400"
               }`}
             >
               Contact Us

@@ -22,24 +22,33 @@ function News({ newsItems }) {
           </div>
         </div>
       ))}
-      
     </div>
   );
 }
 
 const NewsSection = () => {
   const newsItems = [
-    { title: "Quick Shifter", date: "January 02, 2025", imgSrc: "src/assets/P005.jpg" },
-    { title: "Innovation of Riding", date: "January 02, 2025", imgSrc: "src/assets/P002.jpg" },
-    { title: "Pay only 2,999 THB for the best experience!", date: "January 02, 2025", imgSrc: "src/assets/P004.jpg" },
+    {
+      title: "Quick Shifter",
+      date: "January 02, 2025",
+      imgSrc: "src/assets/P005.jpg",
+    },
+    {
+      title: "Innovation of Riding",
+      date: "January 02, 2025",
+      imgSrc: "src/assets/P002.jpg",
+    },
+    {
+      title: "Pay only 2,999 THB for the best experience!",
+      date: "January 02, 2025",
+      imgSrc: "src/assets/P004.jpg",
+    },
   ];
 
   return (
     <section id="news" className="bg-black py-12">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-orange-700 text-4xl font-bold mb-8" >
-          NEWS
-        </h2>
+        <h2 className="text-orange-700 text-4xl font-bold mb-8">NEWS</h2>
         <News newsItems={newsItems} />
       </div>
     </section>
