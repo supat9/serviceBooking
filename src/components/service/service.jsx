@@ -7,6 +7,7 @@ import { jwtDecode } from "jwt-decode";
 
 export default function AppointmentForm() {
   const [activeTab, setActiveTab] = useState("vehicle");
+  const today = new Date().toISOString().split("T")[0];
   const [formData, setFormData] = useState({
     // ข้อมูลยานพาหนะ
     carPlate: "",
@@ -87,10 +88,51 @@ export default function AppointmentForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // ดึงข้อมูลผู้ใช้ที่ login อยู่จาก localStorage
+    const {
+      carPlate,
+      brand,
+      model,
+      year,
+      mileage,
+      repairType,
+      appointmentDate,
+      appointmentTime,
+      privacyPolicy,
+    } = formData;
+
+    if (
+      !carPlate ||
+      !brand ||
+      !model ||
+      !year ||
+      !mileage ||
+      repairType.length === 0 ||
+      !appointmentDate ||
+      !appointmentTime ||
+      !privacyPolicy
+    ) {
+      Swal.fire(
+        "กรุณากรอกข้อมูลให้ครบถ้วน",
+        "โปรดตรวจสอบข้อมูลและลองใหม่อีกครั้ง",
+        "error"
+      );
+      return;
+    }
+
+    if (year < 1900 || year > new Date().getFullYear()) {
+      Swal.fire("ปีรถยนต์ไม่ถูกต้อง", "กรุณากรอกปีรถยนต์ที่ถูกต้อง", "error");
+      return;
+    }
+
+    if (mileage <= 0) {
+      Swal.fire("เลขไมล์ไม่ถูกต้อง", "กรุณากรอกเลขไมล์ที่ถูกต้อง", "error");
+      return;
+    }
+
+    // If validation passes, proceed with submitting the form
     const userId = loggedInUser.user_id;
     try {
-      // 1. เพิ่มข้อมูลรถยนต์ (Vehicle) พร้อมส่ง user_id ที่ได้จากผู้ใช้ที่ login
+      // 1. เพิ่มข้อมูลรถยนต์ (Vehicle)
       const vehicleResponse = await fetch(
         "http://localhost:3000/vehicle/addVehicle",
         {
@@ -120,7 +162,7 @@ export default function AppointmentForm() {
           body: JSON.stringify({
             service_type: formData.repairType.join(", "),
             service_desc: formData.additionalDetails,
-            service_status: "รอดำเนินการ", // กำหนดสถานะเริ่มต้น
+            service_status: "รอดำเนินการ",
             service_time: formData.appointmentTime,
             service_date: formData.appointmentDate,
             vehicle_id: vehicleData.data.vehicle_id,
@@ -132,7 +174,7 @@ export default function AppointmentForm() {
         throw new Error(serviceData.error || "ไม่สามารถเพิ่มข้อมูลบริการได้");
       }
 
-      // 3. เพิ่มข้อมูลนัดหมาย (Appointment) โดยใช้ service_id จากข้อมูลบริการที่เพิ่มเข้าไป
+      // 3. เพิ่มข้อมูลนัดหมาย (Appointment)
       const appointmentResponse = await fetch(
         "http://localhost:3000/appointment/addAppointment",
         {
@@ -151,7 +193,7 @@ export default function AppointmentForm() {
         );
       }
 
-      // หากทุก API เรียกสำเร็จ
+      // Success message
       Swal.fire({
         title: "ส่งข้อมูลสำเร็จ!",
         text: "ระบบได้รับข้อมูลของคุณแล้ว",
@@ -310,6 +352,7 @@ export default function AppointmentForm() {
                   </div>
 
                   <div>
+                    
                     <label className="block font-medium text-lg sm:text-xl">
                       วันที่นัดหมาย <span className="text-red-600">*</span>
                     </label>
@@ -320,6 +363,7 @@ export default function AppointmentForm() {
                       onChange={handleChange}
                       className="w-full p-2 rounded-lg border text-lg sm:text-xl"
                       required
+                      min={today} // Prevent past dates
                     />
                   </div>
 
