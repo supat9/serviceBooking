@@ -108,9 +108,10 @@ export default function RepairOrder() {
             {/* หัวตารางสีส้ม */}
             <thead className="bg-orange-500 text-white">
               <tr>
+              <th className="py-2 px-4 border border-black">วันที่นัดหมาย</th>
+              <th className="py-2 px-4 border border-black">เวลานัดหมาย</th>
                 <th className="py-2 px-4 border border-black">ชื่อ-นามสกุลของลูกค้า</th>
-                <th className="py-2 px-4 border border-black">วันที่นัดหมาย</th>
-                <th className="py-2 px-4 border border-black">เวลานัดหมาย</th>
+
                 <th className="py-2 px-4 border border-black">ป้ายทะเบียน</th>
                 <th className="py-2 px-4 border border-black">ยี่ห้อรถ</th>
                 <th className="py-2 px-4 border border-black">รุ่นรถ</th>
@@ -132,11 +133,11 @@ export default function RepairOrder() {
                         index % 2 === 0 ? "bg-white" : "bg-gray-100"
                       } hover:bg-gray-300 transition duration-200`}
                     >
-                      <td className="py-2 px-4 border border-black">{item.fullname}</td>
-                      <td className="py-2 px-4 border border-black">
+                       <td className="py-2 px-4 border border-black">
                         {appointmentDate.toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" })}
                       </td>
                       <td className="py-2 px-4 border border-black">{item.appointmentTime}</td>
+                      <td className="py-2 px-4 border border-black">{item.fullname}</td>
                       <td className="py-2 px-4 border border-black">{item.licensePlate}</td>
                       <td className="py-2 px-4 border border-black">{item.brand}</td>
                       <td className="py-2 px-4 border border-black">{item.model}</td>
@@ -168,7 +169,7 @@ export default function RepairOrder() {
                 })
               ) : (
                 <tr>
-                  <td colSpan="11" className="text-center py-4">ยังไม่มีข้อมูลนัดหมาย</td>
+                  <td colSpan="11" className="text-center py-4 bg-white">ยังไม่มีข้อมูลนัดหมาย</td>
                 </tr>
               )}
             </tbody>

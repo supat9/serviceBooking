@@ -47,7 +47,7 @@ export default function Nav() {
       icon: "success",
       title: "ออกจากระบบแล้ว",
       text: "คุณได้ออกจากระบบเรียบร้อยแล้ว",
-      timer: 5000,
+      timer: 1000,
       showConfirmButton: false,
     }).then(() => {
       window.location.href = "/#home";
