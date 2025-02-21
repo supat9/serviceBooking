@@ -1,10 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 
 function Hero() {
   const images = [
-    'src/assets/P003.png',
-    'src/assets/P004.png',
-    'src/assets/P005.png',
+    "src/assets/P003.png",
+    "src/assets/P004.png",
+    "src/assets/P005.png",
   ];
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,26 +23,29 @@ function Hero() {
     setCurrentIndex(index);
   };
 
-  // Auto slide every 5 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 5000); // 5000ms = 5 seconds
+    }, 5000);
 
-    return () => clearInterval(interval); // Cleanup on component unmount
+    return () => clearInterval(interval);
   }, [nextSlide]);
 
   return (
-    <div id="default-carousel" className="relative w-full h-screen" data-carousel="slide">
-      {/* Hero wrapper */}
+    <div
+      id="default-carousel"
+      className="relative w-full h-screen"
+      data-carousel="slide"
+    >
+      {/* Hero Wrapper */}
       <div className="relative w-full h-full overflow-hidden">
         {images.map((image, index) => (
           <div
             key={index}
             className={`${
-              index === currentIndex ? 'block' : 'hidden'
+              index === currentIndex ? "block" : "hidden"
             } duration-700 ease-in-out`}
-            data-carousel-item={index === currentIndex ? 'active' : ''}
+            data-carousel-item={index === currentIndex ? "active" : ""}
           >
             <img
               src={image}
@@ -56,26 +59,48 @@ function Hero() {
       {/* Title */}
       <h1
         style={{
-          textAlign: 'center',
-          fontSize: '4rem',
-          fontWeight: 'bold',
-          color: '#fff',
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          textShadow: '5px 5px #b66b0a',
+          textAlign: "center",
+          fontSize: "4rem",
+          fontWeight: "bold",
+          color: "#fff",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          textShadow: "5px 5px #b66b0a",
+          zIndex: 10, // เพิ่ม zIndex เพื่อให้อยู่เหนือภาพ
         }}
       >
         Innovation of Riding
       </h1>
-      <p style={{
-          textAlign: 'center',
+      <p
+        style={{
+          textAlign: "center",
+          position: "absolute",
+          top: "60%", // ปรับให้ต่ำลงจาก h1 เล็กน้อย
+          left: "50%",
+          transform: "translateX(-50%)",
+          fontSize: "1.25rem", // ปรับขนาดข้อความให้พอดีกับมือถือ
+          zIndex: 10, // เพิ่ม zIndex เพื่อให้อยู่เหนือภาพ
+        }}
+        className="mt-2 text-lg md:text-xl text-zinc-300 drop-shadow-m"
+      >
+        Experience the power of Quick Shifter
+      </p>
 
-          position: 'absolute',
-          top: '55%',
-          left: '50%',
-        }} className='text-zinc-300'>Quick Shifter</p>
+      <style>
+        {`
+        @media (max-width: 768px) {
+          h1 {
+            font-size: 2.5rem;
+            top: 40%;
+          }
+          p {
+            font-size: 1rem; 
+            top: 50%;
+          }
+        }`}{" "}
+      </style>
 
       {/* Slider indicators */}
       <div className="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
@@ -84,7 +109,9 @@ function Hero() {
             key={index}
             type="button"
             className={`w-3 h-3 rounded-full ${
-              index === currentIndex ? 'bg-white' : 'bg-white/50 hover:bg-white/75'
+              index === currentIndex
+                ? "bg-white"
+                : "bg-white/50 hover:bg-white/75"
             }`}
             aria-current={index === currentIndex}
             aria-label={`Slide ${index + 1}`}

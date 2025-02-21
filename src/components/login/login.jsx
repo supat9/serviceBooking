@@ -1,49 +1,47 @@
 import { useState } from "react";
-import Nav from "../nav-bar/Nav";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from 'jwt-decode'
+import Swal from "sweetalert2";
+import { jwtDecode } from "jwt-decode";
+import background from "/src/assets/P003.jpg";
+import Nav from "../nav-bar/Nav";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-  // state สำหรับสมัครสมาชิกเพิ่มเติม
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
+  const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
-
+  const [setConfirmPassword] = useState("");
   const [message, setMessage] = useState("");
 
   const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    // ล้างค่าทุกฟิลด์เมื่อเปลี่ยนฟอร์ม
     setUsername("");
     setPassword("");
-    setFullName("");
+    setName("");
     setAddress("");
-    setPhone("");
+    setContact("");
     setEmail("");
+    setConfirmPassword("");
     setMessage("");
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const baseURL = "http://localhost:3000";
-    // กำหนด endpoint ตามฟอร์มที่เลือก
     const endpoint = isLogin
       ? `${baseURL}/auth/login`
       : `${baseURL}/auth/signIn`;
 
-    // เตรียม payload สำหรับส่งข้อมูล
     let payload = { username, password };
 
-    // ถ้าเป็นสมัครสมาชิกให้เพิ่มข้อมูลเพิ่มเติม
     if (!isLogin) {
-      payload = { ...payload, fullName, address, phone, email };
+      payload = { username, name, address, contact, email, password };
     }
 
     try {
@@ -59,11 +57,9 @@ function Login() {
         let errorMsg = "เกิดข้อผิดพลาด";
         try {
           const errorData = await response.json();
-          if (errorData.message) {
-            errorMsg = errorData.message;
-          }
+          if (errorData.message) errorMsg = errorData.message;
         } catch (err) {
-          console.error("Error parsing error response:", err);
+          console.error("Error parsing response:", err);
         }
         setMessage(errorMsg);
         return;
@@ -72,17 +68,32 @@ function Login() {
       const data = await response.json();
 
       if (isLogin) {
-        // จัดเก็บ token เมื่อเข้าสู่ระบบสำเร็จ
         localStorage.setItem("accessToken", data.accessToken);
         localStorage.setItem("refreshToken", data.refreshToken);
-        localStorage.setItem("userData", JSON.stringify(jwtDecode(data.accessToken)));
-        // let userData = localStorage.getItem("accessToken")
-        //       ? jwtDecode(localStorage.getItem("accessToken"))
-        //       : null;
-        setMessage("เข้าสู่ระบบสำเร็จ");
-        navigate("/services");
+        localStorage.setItem(
+          "userData",
+          JSON.stringify(jwtDecode(data.accessToken))
+        );
+
+        Swal.fire({
+          title: "เข้าสู่ระบบสำเร็จ!",
+          icon: "success",
+          timer: 1000,
+          showConfirmButton: false,
+        });
+
+        setTimeout(() => {
+          navigate("/services");
+        }, 2000);
       } else {
-        setMessage("สมัครสมาชิกสำเร็จ! กรุณาเข้าสู่ระบบ");
+        Swal.fire({
+          title: "สมัครสมาชิกสำเร็จ!",
+          text: "กรุณาเข้าสู่ระบบเพื่อใช้งาน",
+          icon: "success",
+          timer: 2000,
+          showConfirmButton: false,
+        });
+
         setIsLogin(true);
       }
     } catch (error) {
@@ -93,136 +104,156 @@ function Login() {
 
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Navbar */}
       <Nav />
 
-      <div className="flex-grow flex items-center justify-center bg-gray-100">
-        <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8 m-4">
-          {isLogin ? (
-            <div>
-              <h2 className="text-2xl font-bold text-center mb-6">
-                เข้าสู่ระบบ
-              </h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="ชื่อผู้ใช้"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    placeholder="รหัสผ่าน"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md font-semibold transition-colors duration-200"
+      <div className="flex-grow flex items-center justify-center">
+        <div className="flex w-3/4 h-[80vh] shadow-lg rounded-lg overflow-hidden">
+          {/* พื้นหลังซ้าย */}
+          <div
+            className="w-1/2 flex flex-col justify-center items-center text-white p-10"
+            style={{
+              background: `url(${background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <h1 className="text-4xl font-bold">WELCOME BACK</h1>
+            <p className="mt-2 text-center">
+              Nice to see you again. Please enter your details to continue.
+            </p>
+          </div>
+
+          {/* ส่วน Login / Register */}
+          <div className="w-1/2 flex flex-col justify-center items-center bg-white p-10">
+            {isLogin ? (
+              <>
+                <h2 className="text-3xl font-bold text-orange-600 mb-6">
+                  Login Account
+                </h2>
+                <form onSubmit={handleSubmit} className="w-80">
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-semibold transition duration-200"
+                  >
+                    Login
+                  </button>
+                </form>
+                <p
+                  className="mt-4 text-orange-600 cursor-pointer"
+                  onClick={toggleForm}
                 >
-                  เข้าสู่ระบบ
-                </button>
-              </form>
-              <p
-                className="text-center mt-4 text-blue-500 cursor-pointer"
-                onClick={toggleForm}
-              >
-                ยังไม่มีบัญชี? สมัครสมาชิก
-              </p>
-            </div>
-          ) : (
-            <div>
-              <h2 className="text-2xl font-bold text-center mb-6">
-                สมัครสมาชิก
-              </h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="ชื่อผู้ใช้"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="ชื่อ-นามสกุล"
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="ที่อยู่"
-                    value={address}
-                    onChange={(e) => setAddress(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="text"
-                    placeholder="เบอร์ติดต่อ"
-                    value={phone}
-                    onChange={(e) => setPhone(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-4">
-                  <input
-                    type="email"
-                    placeholder="อีเมล"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <div className="mb-6">
-                  <input
-                    type="password"
-                    placeholder="รหัสผ่าน"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="w-full bg-green-500 hover:bg-green-600 text-white py-2 rounded-md font-semibold transition-colors duration-200"
+                  ยังไม่มีบัญชี? สมัครสมาชิก
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-3xl font-bold text-green-500 mb-6">
+                  Register Account
+                </h2>
+                <form onSubmit={handleSubmit} className="w-80">
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                      autoComplete="email"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      placeholder="Address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="text"
+                      placeholder="Contact"
+                      value={contact}
+                      onChange={(e) => setContact(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  <div className="mb-4">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-semibold transition duration-200"
+                  >
+                    Register
+                  </button>
+                </form>
+                <p
+                  className="mt-4 text-orange-600 cursor-pointer"
+                  onClick={toggleForm}
                 >
-                  สมัครสมาชิก
-                </button>
-              </form>
-              <p
-                className="text-center mt-4 text-blue-500 cursor-pointer"
-                onClick={toggleForm}
-              >
-                มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
-              </p>
-            </div>
-          )}
-          {message && (
-            <div className="mt-4 text-center text-red-500">{message}</div>
-          )}
+                  มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
+                </p>
+              </>
+            )}
+            {message && <p className="mt-4 text-red-500">{message}</p>}
+          </div>
         </div>
       </div>
+      
     </div>
   );
 }

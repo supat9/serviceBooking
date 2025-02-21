@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Nav from "../nav-bar/Nav";
+import Footer from "../footer-page/footer";
 
 export default function RepairOrder() {
   const [appointments, setAppointments] = useState([]);
@@ -45,7 +46,7 @@ export default function RepairOrder() {
       if (data) {
         setAppointments(data);
       }
-    } catch  {
+    } catch {
       Swal.fire("Error", "ไม่สามารถโหลดข้อมูลนัดหมายได้", "error");
     }
   };
@@ -93,24 +94,31 @@ export default function RepairOrder() {
 
   return (
     <>
+    <div
+      className="min-h-screen bg-cover bg-center"
+      style={{ backgroundImage: "url('/src/assets/background.png')" }}
+    >
       <Nav />
       <div>
-        <h1 className="text-black text-2xl font-bold mb-4">ประวัติการทำรายการ</h1>
+      <h1 className="text-black text-4xl font-bold mb-6 text-center">
+              ประวัติการทำรายการ
+            </h1>
         <div className="overflow-x-auto">
-          <table className="min-w-full bg-gray-800 text-white">
-            <thead>
+          <table className="min-w-full border border-black">
+            {/* หัวตารางสีส้ม */}
+            <thead className="bg-orange-500 text-white">
               <tr>
-                <th className="py-2 px-4 border border-gray-700">ชื่อ-นามสกุลของลูกค้า</th>
-                <th className="py-2 px-4 border border-gray-700">วันที่นัดหมาย</th>
-                <th className="py-2 px-4 border border-gray-700">เวลานัดหมาย</th>
-                <th className="py-2 px-4 border border-gray-700">ป้ายทะเบียน</th>
-                <th className="py-2 px-4 border border-gray-700">ยี่ห้อรถ</th>
-                <th className="py-2 px-4 border border-gray-700">รุ่นรถ</th>
-                <th className="py-2 px-4 border border-gray-700">ปี</th>
-                <th className="py-2 px-4 border border-gray-700">ประเภทงานซ่อม</th>
-                <th className="py-2 px-4 border border-gray-700">รายละเอียด</th>
-                <th className="py-2 px-4 border border-gray-700">สถานะ</th>
-                <th className="py-2 px-4 border border-gray-700">จัดการ</th>
+                <th className="py-2 px-4 border border-black">ชื่อ-นามสกุลของลูกค้า</th>
+                <th className="py-2 px-4 border border-black">วันที่นัดหมาย</th>
+                <th className="py-2 px-4 border border-black">เวลานัดหมาย</th>
+                <th className="py-2 px-4 border border-black">ป้ายทะเบียน</th>
+                <th className="py-2 px-4 border border-black">ยี่ห้อรถ</th>
+                <th className="py-2 px-4 border border-black">รุ่นรถ</th>
+                <th className="py-2 px-4 border border-black">ปี</th>
+                <th className="py-2 px-4 border border-black">ประเภทงานซ่อม</th>
+                <th className="py-2 px-4 border border-black">รายละเอียด</th>
+                <th className="py-2 px-4 border border-black">สถานะ</th>
+                <th className="py-2 px-4 border border-black">จัดการ</th>
               </tr>
             </thead>
             <tbody>
@@ -118,19 +126,24 @@ export default function RepairOrder() {
                 appointments.map((item, index) => {
                   const appointmentDate = new Date(item.appointmentDate);
                   return (
-                    <tr key={index}>
-                      <td className="py-2 px-4 border border-gray-700">{item.fullname}</td>
-                      <td className="py-2 px-4 border border-gray-700">
+                    <tr
+                      key={index}
+                      className={`${
+                        index % 2 === 0 ? "bg-white" : "bg-gray-100"
+                      } hover:bg-gray-300 transition duration-200`}
+                    >
+                      <td className="py-2 px-4 border border-black">{item.fullname}</td>
+                      <td className="py-2 px-4 border border-black">
                         {appointmentDate.toLocaleDateString("th-TH", { timeZone: "Asia/Bangkok" })}
                       </td>
-                      <td className="py-2 px-4 border border-gray-700">{item.appointmentTime}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.licensePlate}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.brand}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.model}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.year}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.serviceType}</td>
-                      <td className="py-2 px-4 border border-gray-700">{item.serviceDesc}</td>
-                      <td className="py-2 px-4 border border-gray-700">
+                      <td className="py-2 px-4 border border-black">{item.appointmentTime}</td>
+                      <td className="py-2 px-4 border border-black">{item.licensePlate}</td>
+                      <td className="py-2 px-4 border border-black">{item.brand}</td>
+                      <td className="py-2 px-4 border border-black">{item.model}</td>
+                      <td className="py-2 px-4 border border-black">{item.year}</td>
+                      <td className="py-2 px-4 border border-black">{item.serviceType}</td>
+                      <td className="py-2 px-4 border border-black">{item.serviceDesc}</td>
+                      <td className="py-2 px-4 border border-black">
                         <select
                           value={editStatus[index] || item.status}
                           onChange={(e) => handleStatusChange(index, e.target.value)}
@@ -142,7 +155,7 @@ export default function RepairOrder() {
                           <option value="Cancelled">ยกเลิก</option>
                         </select>
                       </td>
-                      <td className="py-2 px-4 border border-gray-700">
+                      <td className="py-2 px-4 border border-black">
                         <button
                           onClick={() => handleSaveStatus(item.service_id, index)}
                           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
@@ -162,6 +175,10 @@ export default function RepairOrder() {
           </table>
         </div>
       </div>
-    </>
+      
+    </div>
+    <Footer />
+</>
   );
 }
+

@@ -37,7 +37,7 @@ const NewsSection = () => {
   return (
     <section id="news" className="bg-black py-12">
       <div className="container mx-auto px-4 text-center">
-        <h2 className="text-orange-700 text-3xl font-bold mb-8" data-aos="fade-up" data-aos-delay="200">
+        <h2 className="text-orange-700 text-4xl font-bold mb-8" >
           NEWS
         </h2>
         <News newsItems={newsItems} />
