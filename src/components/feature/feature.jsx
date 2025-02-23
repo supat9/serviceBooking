@@ -17,12 +17,12 @@ function Feature() {
             </svg>
             TikTok:{" "}
             <a
-              href="https://www.tiktok.com/@dlog_tech"
+              href="https://www.tiktok.com/@dlogtech"
               target="_blank"
               className="text-orange-600  ml-2 hover:underline"
             >
               {" "}
-              @dlog_tech
+              @dlogtech
             </a>
           </h2>
           <h2 className="mb-8 mt-4 flex text-3xl font-bold text-black items-center">

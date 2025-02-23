@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom"; // ใช้ navigate
-import Nav from "../nav-bar/Nav.jsx";
+import Nav from "../nav-bar/nav.jsx";
 import Footer from "../footer-page/footer.jsx";
 import { jwtDecode } from "jwt-decode";
 
@@ -27,7 +27,9 @@ export default function AppointmentForm() {
     { label: "เช็คระยะ", value: "maintenance" },
     { label: "ซ่อมทั่วไป", value: "general_repair" },
     { label: "ซ่อมสีตัวถัง", value: "body_paint" },
-    { label: "รับประกัน", value: "warranty" },
+    { label: "งานรับประกัน", value: "warranty" },
+    { label: "เปลี่ยนถ่ายน้ำมันเครื่อง", value: "oil_change" },
+    { label: "ปัญหาเครื่องยนต์", value: "engine_issue" },
   ];
 
   const navigate = useNavigate();
@@ -162,7 +164,7 @@ export default function AppointmentForm() {
           body: JSON.stringify({
             service_type: formData.repairType.join(", "),
             service_desc: formData.additionalDetails,
-            service_status: "รอดำเนินการ",
+            service_status: "Pending",
             service_time: formData.appointmentTime,
             service_date: formData.appointmentDate,
             vehicle_id: vehicleData.data.vehicle_id,
@@ -211,12 +213,12 @@ export default function AppointmentForm() {
   return (
     <>
       <div
-        className="min-h-screen bg-cover bg-center"
+        className="min-h-screen bg-cover bg-center "
         style={{ backgroundImage: "url('/src/assets/background.png')" }}
       >
         <Nav />
         {loginFlag ? (
-          <div className="max-w-3xl mx-auto p-6 bg-white mt-4 rounded-lg shadow-3xl">
+          <div className="max-w-3xl mx-auto p-6 bg-white mt-2   rounded-lg shadow-3xl">
             <div className="flex justify-center border-b mb-6">
               <button
                 type="button"
@@ -352,7 +354,6 @@ export default function AppointmentForm() {
                   </div>
 
                   <div>
-                    
                     <label className="block font-medium text-lg sm:text-xl">
                       วันที่นัดหมาย <span className="text-red-600">*</span>
                     </label>

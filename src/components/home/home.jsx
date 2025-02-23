@@ -1,5 +1,5 @@
 // import { useNavigate } from "react-router-dom";
-import Nav from "../nav-bar/Nav.jsx";
+import Nav from "../nav-bar/nav.jsx";
 import Hero from "../hero/hero.jsx";
 import NewsSection from "../news/news.jsx";
 import Footer from "../footer-page/footer.jsx";

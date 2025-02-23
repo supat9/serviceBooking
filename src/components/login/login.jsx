@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { jwtDecode } from "jwt-decode";
 import background from "/src/assets/P003.jpg";
-import Nav from "../nav-bar/Nav";
+import Nav from "../nav-bar/nav";
 
 function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -55,13 +55,15 @@ function Login() {
 
       if (!response.ok) {
         let errorMsg = "เกิดข้อผิดพลาด";
-        try {
-          const errorData = await response.json();
-          if (errorData.message) errorMsg = errorData.message;
-        } catch (err) {
-          console.error("Error parsing response:", err);
+        if (response.status === 401) {
+          errorMsg = "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง";
         }
-        setMessage(errorMsg);
+        Swal.fire({
+          title: "เกิดข้อผิดพลาด",
+          text: errorMsg,
+          icon: "error",
+          confirmButtonText: "ลองใหม่",
+        });
         return;
       }
 
@@ -99,6 +101,12 @@ function Login() {
     } catch (error) {
       console.error("Error:", error);
       setMessage("เกิดข้อผิดพลาดในระบบ");
+      Swal.fire({
+        title: "เกิดข้อผิดพลาด",
+        text: "ไม่สามารถติดต่อเซิร์ฟเวอร์ได้",
+        icon: "error",
+        confirmButtonText: "ลองใหม่",
+      });
     }
   };
 

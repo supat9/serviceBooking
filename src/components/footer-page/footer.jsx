@@ -14,6 +14,8 @@ function Footer() {
           <Link to="/payment" className="text-blue-500 hover:underline">
             Payment
           </Link>
+          |{" "}
+          <Link to="/editUser"className="text-blue-500 hover:underline">EditUser</Link>
         </p>
         <p className="mt-2">
           ที่อยู่: Tanon Songpol Alley, ตำบลลำพยา อำเภอเมืองนครปฐม นครปฐม 73000

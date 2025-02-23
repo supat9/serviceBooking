@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import Nav from "../nav-bar/Nav";
+import Nav from "../nav-bar/nav";
 import Footer from "../footer-page/footer";
 
 export default function RepairOrder() {
@@ -71,6 +71,7 @@ export default function RepairOrder() {
 
     try {
       const token = localStorage.getItem("accessToken");
+      console.log("appointmentId", appointmentId);
       const response = await fetch(
         "http://localhost:3000/service/updateService",
         {
@@ -79,6 +80,7 @@ export default function RepairOrder() {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
+
           body: JSON.stringify({
             service_id: appointmentId,
             service_status: newStatus,
@@ -107,7 +109,7 @@ export default function RepairOrder() {
         <Nav />
         <div>
           <h1 className="text-black text-4xl font-bold mb-6 text-center">
-            ประวัติการทำรายการ
+            รายการการซ่อมรถ
           </h1>
           <div className="overflow-x-auto">
             <table className="min-w-full border border-black">
@@ -119,9 +121,8 @@ export default function RepairOrder() {
                   </th>
                   <th className="py-2 px-4 border border-black">เวลานัดหมาย</th>
                   <th className="py-2 px-4 border border-black">
-                    ชื่อ-นามสกุลของลูกค้า
+                    ชื่อ-นามสกุล
                   </th>
-
                   <th className="py-2 px-4 border border-black">ป้ายทะเบียน</th>
                   <th className="py-2 px-4 border border-black">ยี่ห้อรถ</th>
                   <th className="py-2 px-4 border border-black">รุ่นรถ</th>
@@ -182,16 +183,16 @@ export default function RepairOrder() {
                             }
                             className="text-black p-1 rounded"
                           >
-                            <option value="Pending">รอดำเนินการ</option>
-                            <option value="In Progress">กำลังดำเนินการ</option>
-                            <option value="Completed">เสร็จสิ้น</option>
-                            <option value="Cancelled">ยกเลิก</option>
+                            <option value="Pending">Pending</option>
+                            <option value="In Progress">In Progress</option>
+                            <option value="Completed">Completed</option>
+                            <option value="Cancelled">Cancelled</option>
                           </select>
                         </td>
                         <td className="py-2 px-4 border border-black">
                           <button
                             onClick={() =>
-                              handleSaveStatus(item.service_id, index)
+                              handleSaveStatus(item.serviceId, index)
                             }
                             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded"
                           >

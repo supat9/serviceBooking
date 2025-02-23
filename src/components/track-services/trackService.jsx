@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom"; // ใช้ navigate
-import Nav from "../nav-bar/Nav.jsx";
+import Nav from "../nav-bar/nav.jsx";
 import Footer from "../footer-page/footer.jsx";
 
-export default function Track() {
+export default function TrackServices() {
   const [appointments, setAppointments] = useState([]);
   const navigate = useNavigate();
   const [loginFlag, setLoginFlag] = useState(false);
@@ -68,7 +68,12 @@ export default function Track() {
               <table className="min-w-full border border-black">
                 {/* หัวตาราง สีส้ม */}
                 <thead>
+                  
+                  
                   <tr className="bg-orange-500 text-white">
+                  <th className="py-2 px-4 border border-black">
+                      Service ID
+                    </th>
                     <th className="py-2 px-4 border border-black">
                       ชื่อ-นามสกุล
                     </th>
@@ -97,6 +102,9 @@ export default function Track() {
                             index % 2 === 0 ? "bg-white" : "bg-gray-100"
                           } hover:bg-gray-300 transition duration-200`}
                         >
+                          <td className="py-2 px-4 border border-black">
+                            {item.serviceId}
+                          </td>
                           <td className="py-2 px-4 border border-black">
                             {item.fullname}
                           </td>
