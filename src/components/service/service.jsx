@@ -218,7 +218,7 @@ export default function AppointmentForm() {
       >
         <Nav />
         {loginFlag ? (
-          <div className="max-w-3xl mx-auto p-6 bg-white mt-2   rounded-lg shadow-3xl">
+          <div className="max-w-3xl mx-auto p-6 bg-white mt-2  rounded-lg shadow-3xl">
             <div className="flex justify-center border-b mb-6">
               <button
                 type="button"

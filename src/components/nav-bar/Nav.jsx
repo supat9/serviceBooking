@@ -55,25 +55,37 @@ export default function Nav() {
             <Link
               smooth
               to="/#home"
-              className="text-white hover:text-orange-400 font-bold"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
             >
               Home
             </Link>
           </li>
           <li>
             <Link
-            smooth
+              smooth
               to="/#news"
-              className="text-white hover:text-orange-400 font-bold"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
             >
               News
             </Link>
           </li>
           <li>
             <Link
-            smooth
+              smooth
               to="/#contact"
-              className="text-white hover:text-orange-400 font-bold"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
             >
               Contact Us
             </Link>
@@ -81,7 +93,11 @@ export default function Nav() {
           <li>
             <Link
               to="/services"
-              className="text-white hover:text-orange-400 font-bold"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
             >
               Service
             </Link>
@@ -89,7 +105,11 @@ export default function Nav() {
           <li>
             <Link
               to="/TrackServices"
-              className="text-white hover:text-orange-400 font-bold"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
             >
               Track Service
             </Link>
@@ -97,7 +117,7 @@ export default function Nav() {
         </ul>
 
         {/* Profile + Logout (Desktop) */}
-        <div className="hidden md:flex ml-auto items-center space-x-6">
+        <div className="hidden md:flex ml-auto items-center space-x-10">
           {isLoggedIn ? (
             <>
               <Link
@@ -107,9 +127,11 @@ export default function Nav() {
                 <FaUserCircle className="mr-2 text-xl" />
                 {userData?.username}
               </Link>
+
               <button
                 onClick={handleLogout}
-                className="text-white hover:text-orange-400 font-bold"
+                className="bg-orange-500 text-black font-bold px-6 py-2 rounded-full shadow-md
+             hover:bg-orange-700 hover:shadow-lg transition duration-300"
               >
                 Logout
               </button>
@@ -117,7 +139,8 @@ export default function Nav() {
           ) : (
             <Link
               to="/login"
-              className="text-white hover:text-orange-400 font-bold"
+              className="bg-orange-500 text-black font-bold px-6 py-2 rounded-full shadow-md
+             hover:bg-orange-700 hover:shadow-lg transition duration-300"
             >
               Login / Sign up
             </Link>
@@ -141,7 +164,7 @@ export default function Nav() {
 
       {/* เมนู Mobile */}
       {isOpen && (
-        <div className="md:hidden bg-black text-white absolute top-0 left-0 w-full h-screen z-50 p-6 flex flex-col">
+        <div className="md:hidden bg-black text-white absolute top-0 left-0 w-full  z-50 p-6 flex flex-col">
           <button
             onClick={() => setIsOpen(false)}
             className="absolute right-3 top-10 text-white hover:text-orange-400 p-2 w-8 h-8"

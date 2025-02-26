@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Nav from "../nav-bar/nav";
 import Footer from "../footer-page/footer";
-import { FaEdit, FaTrashAlt } from "react-icons/fa"; // ใช้ react-icons
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 export default function EditUser() {
   const [users, setUsers] = useState([]);
@@ -29,7 +29,10 @@ export default function EditUser() {
       return;
     }
 
-    if (userData.permission === "customer" || userData.permission === "mechanic") {
+    if (
+      userData.permission === "customer" ||
+      userData.permission === "mechanic"
+    ) {
       Swal.fire("Error", "ไม่สามารถเข้าถึงหน้านี้ได้", "error").then(() => {
         navigate("/#home");
       });
@@ -189,154 +192,159 @@ export default function EditUser() {
         className="min-h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/src/assets/background.png')" }}
       >
-        <div className="min-h-screen flex flex-col">
-          <Nav />
-          <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
-            <h1 className="text-3xl text-center font-bold mb-6">จัดการผู้ใช้</h1>
+        <Nav />
+        <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
+          <h1 className="text-3xl text-center font-bold mb-6">จัดการผู้ใช้</h1>
 
-            <div className="overflow-x-auto">
-              <table className="min-w-full table-auto border-collapse border border-gray-300 bg-white">
-                <thead>
-                  <tr className="bg-gray-200">
-                  <th className="px-4 py-2 border border-gray-300">UserId</th>
-                    <th className="px-4 py-2 border border-gray-300">ชื่อผู้ใช้</th>
-                    <th className="px-4 py-2 border border-gray-300">ชื่อ-นามสกุล</th>
-                    <th className="px-4 py-2 border border-gray-300">ที่อยู่</th>
-                    <th className="px-4 py-2 border border-gray-300">อีเมล</th>
-                    <th className="px-4 py-2 border border-gray-300">หมายเลขโทรศัพท์</th>
-                    <th className="px-4 py-2 border border-gray-300">สิทธิ์ของผู้ใช้</th>
-                    <th className="px-4 py-2 border border-gray-300">จัดการผู้ใช้</th>
+          <div className="overflow-x-auto">
+            <table className="min-w-full table-auto border-collapse border border-gray-300 bg-white">
+              <thead>
+                <tr className="bg-gray-200">
+                  <th className="px-4 py-2 border border-gray-300">User Id</th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    ชื่อผู้ใช้
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    ชื่อ-นามสกุล
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300">ที่อยู่</th>
+                  <th className="px-4 py-2 border border-gray-300">อีเมล</th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    หมายเลขโทรศัพท์
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    สิทธิ์ของผู้ใช้
+                  </th>
+                  <th className="px-4 py-2 border border-gray-300">
+                    จัดการผู้ใช้
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {users.map((user) => (
+                  <tr key={user.user_id} className="border-b hover:bg-gray-50">
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.user_id}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.username}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.name}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.address}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.email}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.contact}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      {user.permission}
+                    </td>
+                    <td className="px-4 py-2 border border-gray-300">
+                      <button
+                        onClick={() => handleEditUser(user)}
+                        className="text-blue-600 hover:text-blue-800 mr-2"
+                      >
+                        <FaEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteUser(user.user_id)}
+                        className="text-red-600 hover:text-red-800"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {users.map((user) => (
-                    <tr
-                      key={user.user_id}
-                      className="border-b hover:bg-gray-50"
-                    >
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.user_id}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.username}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.name}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.address}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.email}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.contact}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        {user.permission}
-                      </td>
-                      <td className="px-4 py-2 border border-gray-300">
-                        <button
-                          onClick={() => handleEditUser(user)}
-                          className="text-blue-600 hover:text-blue-800 mr-2"
-                        >
-                          <FaEdit />
-                        </button>
-                        <button
-                          onClick={() => handleDeleteUser(user.user_id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          <FaTrashAlt />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            {editingUser && (
-              <div className="mt-8 p-6 bg-white rounded-lg shadow-lg">
-                <h2 className="text-2xl font-semibold mb-4">แก้ไขโปรไฟล์</h2>
-                <form onSubmit={handleUpdateProfile} className="space-y-4">
-                  <div>
-                    <label className="block text-lg">ชื่อ:</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={userData.name}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-lg">ที่อยู่:</label>
-                    <input
-                      type="text"
-                      name="address"
-                      value={userData.address}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-lg">หมายเลขโทรศัพท์:</label>
-                    <input
-                      type="text"
-                      name="contact"
-                      value={userData.contact}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-lg">อีเมล:</label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={userData.email}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-lg">Permission:</label>
-                    <select
-                      name="permission"
-                      value={userData.permission}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    >
-                      <option value="customer">Customer</option>
-                      <option value="admin">Admin</option>
-                      <option value="mechanic">Mechanic</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-lg">
-                      รหัสผ่านใหม่ (ถ้าต้องการเปลี่ยน):
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      value={userData.password}
-                      onChange={handleChange}
-                      className="w-full p-3 border border-gray-300 rounded-lg"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-600 text-white py-3 rounded-lg mt-4"
-                  >
-                    อัปเดตโปรไฟล์
-                  </button>
-                </form>
-              </div>
-            )}
+                ))}
+              </tbody>
+            </table>
           </div>
-          <Footer />
+
+          {editingUser && (
+            <div className="mt-8 p-6 bg-white rounded-lg shadow-lg">
+              <h2 className="text-2xl font-semibold mb-4">แก้ไขโปรไฟล์</h2>
+              <form onSubmit={handleUpdateProfile} className="space-y-4">
+                <div>
+                  <label className="block text-lg">ชื่อ:</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={userData.name}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-lg">ที่อยู่:</label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={userData.address}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-lg">หมายเลขโทรศัพท์:</label>
+                  <input
+                    type="text"
+                    name="contact"
+                    value={userData.contact}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-lg">อีเมล:</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={userData.email}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <div>
+                  <label className="block text-lg">Permission:</label>
+                  <select
+                    name="permission"
+                    value={userData.permission}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  >
+                    <option value="customer">Customer</option>
+                    <option value="admin">Admin</option>
+                    <option value="mechanic">Mechanic</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-lg">
+                    รหัสผ่านใหม่ (ถ้าต้องการเปลี่ยน):
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    value={userData.password}
+                    onChange={handleChange}
+                    className="w-full p-3 border border-gray-300 rounded-lg"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="w-full bg-blue-600 text-white py-3 rounded-lg mt-4"
+                >
+                  อัปเดตโปรไฟล์
+                </button>
+              </form>
+            </div>
+          )}
         </div>
       </div>
+      <Footer />
     </>
   );
 }

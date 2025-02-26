@@ -4,9 +4,14 @@ import Service from "./components/service/service";
 import { createBrowserRouter, Route, RouteObject, createRoutesFromElements } from "react-router-dom";
 import TrackService from "./components/track-services/trackService";
 import Login from "./components/login/login";
+import Profile from "./components/profile/profile";
 import RepairOrder from "./components/backoffice/repairOrder";
 import EditUser from "./components/backoffice/editUser";
-import Profile from "./components/profile/profile";
+import EditVehicle from "./components/backoffice/editVehicle";
+import EditService from "./components/backoffice/editService";
+import EditAppointment from "./components/backoffice/editAppointment";
+import Payment from "./components/backoffice/payment";
+
 export const routeConfig = [
     {
         path: "/",
@@ -36,6 +41,22 @@ export const routeConfig = [
     {
         path: "editUser",
         element: <EditUser/>,
+    },
+    {
+        path:"editVehicle",
+        element:<EditVehicle/>
+    },
+    {
+        path:"editService",
+        element:<EditService/>
+    },
+    {
+        path:"editAppointment",
+        element:<EditAppointment/>
+    },
+    {
+        path:"payment",
+        element:<Payment/>
     }
 ]
 
