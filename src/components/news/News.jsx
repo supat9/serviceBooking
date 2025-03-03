@@ -46,12 +46,28 @@ const NewsSection = () => {
   ];
 
   return (
-    <section id="news" className="bg-black py-12">
-      <div className="container mx-auto px-4 text-center">
-        <h2 className="text-orange-700 text-4xl font-bold mb-8">NEWS</h2>
-        <News newsItems={newsItems} />
-      </div>
-    </section>
+    <div>
+      <section id="news" className="bg-black py-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-orange-700 text-4xl font-bold mb-8">NEWS</h2>
+          <News newsItems={newsItems} />
+        </div>
+      </section>
+      <section id="video" className="bg-orange-600 py-6"> {/* ลด py-12 เป็น py-6 */}
+        <div className="flex flex-col justify-center items-center bg-orange-600 p-6 rounded-lg min-h-[500px]">
+          <h3 className="text-black-700 text-4xl font-bold mb-8">WATCH OUR VIDEO</h3>
+          <iframe
+            width="660"
+            height="415"
+            src="https://www.youtube.com/embed/tnLqk7ogGeo?si=-tSV73AXgymSWJe3"
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          ></iframe>
+        </div>
+      </section>
+    </div>
   );
 };
 

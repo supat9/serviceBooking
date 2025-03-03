@@ -114,6 +114,19 @@ export default function Nav() {
               Track Service
             </Link>
           </li>
+            <li>
+            <Link
+              to="/payment"
+              className="relative text-white font-bold hover:text-orange-400 
+             after:content-[''] after:absolute after:left-0 after:bottom-0 
+             after:w-0 after:h-[2px] after:bg-orange-400 
+             after:transition-all after:duration-300 
+             hover:after:w-full"
+            >
+              Payment
+            </Link>
+          </li>
+
         </ul>
 
         {/* Profile + Logout (Desktop) */}
@@ -226,6 +239,15 @@ export default function Nav() {
                 onClick={() => setIsOpen(false)}
               >
                 Track Service
+              </Link>
+            </li>
+            <li>
+              <Link
+                to="/Payment"
+                className="block text-white hover:text-orange-400 font-bold"
+                onClick={() => setIsOpen(false)}
+              >
+                Payment
               </Link>
             </li>
 

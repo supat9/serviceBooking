@@ -114,8 +114,9 @@ export default function EditAppointment() {
         style={{ backgroundImage: "url('/src/assets/background.png')" }}
       >
           <Nav />
+          
           <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
-            <h1 className="text-3xl text-center font-bold mb-6">จัดการการนัดหมาย</h1>
+            <h1 className="text-3xl text-center font-bold mb-6">จัดการข้อมูลการนัดหมาย</h1>
 
             <div className="overflow-x-auto">
               <table className="min-w-full table-auto border-collapse border border-gray-300 bg-white">

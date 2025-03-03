@@ -10,7 +10,8 @@ import EditUser from "./components/backoffice/editUser";
 import EditVehicle from "./components/backoffice/editVehicle";
 import EditService from "./components/backoffice/editService";
 import EditAppointment from "./components/backoffice/editAppointment";
-import Payment from "./components/backoffice/payment";
+import Payment from "./components/payment/payment";
+import AddBill from "./components/backoffice/addBill";
 
 export const routeConfig = [
     {
@@ -57,6 +58,10 @@ export const routeConfig = [
     {
         path:"payment",
         element:<Payment/>
+    },
+    {
+        path:"addBill",
+        element:<AddBill/>
     }
 ]
 

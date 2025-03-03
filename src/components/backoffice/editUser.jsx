@@ -97,7 +97,7 @@ export default function EditUser() {
   const deleteUser = async (userId) => {
     try {
       const response = await fetch("http://localhost:3000/auth/deleteUser", {
-        method: "DELETE",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -194,7 +194,7 @@ export default function EditUser() {
       >
         <Nav />
         <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
-          <h1 className="text-3xl text-center font-bold mb-6">จัดการผู้ใช้</h1>
+          <h1 className="text-3xl text-center font-bold mb-6">จัดการข้อมูลผู้ใช้</h1>
 
           <div className="overflow-x-auto">
             <table className="min-w-full table-auto border-collapse border border-gray-300 bg-white">

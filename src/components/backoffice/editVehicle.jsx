@@ -215,7 +215,7 @@ export default function EditVehicle() {
           <Nav />
           <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
             <h1 className="text-3xl text-center font-bold mb-6">
-              จัดการยานพาหนะ
+              จัดการข้อมูลยานพาหนะ
             </h1>
 
             <div className="overflow-x-auto">

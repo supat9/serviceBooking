@@ -216,7 +216,7 @@ export default function EditService() {
           <Nav />
           <div className="flex-grow max-w-7xl mx-auto px-4 py-8">
             <h1 className="text-3xl text-center font-bold mb-6">
-              จัดการบริการ
+              จัดการข้อมูลบริการ
             </h1>
 
             <div className="overflow-x-auto">
