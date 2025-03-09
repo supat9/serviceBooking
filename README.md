@@ -1,8 +1,17 @@
-#Car Repair Booking System                                                                              
-** Developed a web-based car repair appointment system with real-time booking management.
-** Built a responsive UI using React.js and Tailwind CSS.
-** Implemented RESTful API with Node.js and PostgreSQL for handling customer requests and repair schedules.
-** Developed a payment verification system to track and confirm service payments.
-** Implemented user authentication with login and registration functionality.
-** Designed a repair history module to store past service records.
-** Integrated a payment history feature to keep track of past transactions.
+# 🚗 Car Repair Booking System  
+
+A web-based car repair appointment system with real-time booking management.  
+
+## 📌 Features  
+- ✅ **Real-time appointment booking** for car repair services  
+- 🎨 **Responsive UI** built with **React.js** and **Tailwind CSS**  
+- ⚡ **RESTful API** powered by **Node.js** and **PostgreSQL**  
+- 💳 **Payment verification system** to track and confirm service payments  
+- 🔐 **User authentication** with login and registration functionality  
+- 📜 **Repair history module** to store past service records  
+- 💰 **Payment history tracking** for transaction management  
+
+## 🛠️ Tech Stack  
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Node.js, PostgreSQL  
+- **Authentication:** JWT  
