@@ -114,7 +114,7 @@ export default function Nav() {
               Track Service
             </Link>
           </li>
-            <li>
+          <li>
             <Link
               to="/payment"
               className="relative text-white font-bold hover:text-orange-400 
@@ -126,7 +126,6 @@ export default function Nav() {
               Payment
             </Link>
           </li>
-
         </ul>
 
         {/* Profile + Logout (Desktop) */}

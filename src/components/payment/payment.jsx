@@ -33,13 +33,15 @@ export default function Payment() {
   }, [navigate]);
 
   const fetchRepairOrders = async () => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
+    console.log("userData ", userData);
     try {
       const response = await fetch(
         "http://localhost:3000/repairOrder/getRepairOrders",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ userId: 1 }),
+          body: JSON.stringify({ userId: userData.user_id })
         }
       );
 

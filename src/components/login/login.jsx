@@ -112,156 +112,157 @@ function Login() {
 
   return (
     <div className="min-h-screen flex flex-col">
-  {/* Navbar */}
-  <Nav />
+      {/* Navbar */}
+      <Nav />
 
-  <div className="flex-grow flex items-center justify-center">
-    <div className="flex w-full md:w-3/4 h-[80vh] shadow-lg rounded-lg overflow-hidden">
-      {/* พื้นหลังซ้าย */}
-      <div
-        className="w-full md:w-1/2 flex flex-col justify-center items-center text-white p-6 md:p-10 transform transition duration-200 hover:scale-105"
-        style={{
-          background: `url(${background})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <h1 className="text-3xl md:text-4xl font-bold">Welcome to Dlog Tech</h1>
-        <p className="mt-2 text-center">
-          Please log in or sign up to continue.
-        </p>
-      </div>
+      <div className="flex-grow flex items-center justify-center p-4">
+        <div className="flex flex-col lg:flex-row w-full max-w-5xl shadow-lg rounded-lg overflow-hidden">
+          {/* Background section - Full width on mobile, half on larger screens */}
+          <div
+            className="w-full lg:w-1/2 flex flex-col justify-center items-center text-white p-6 sm:p-8 lg:p-10 min-h-[200px] sm:min-h-[250px] lg:min-h-[500px] transform transition duration-200 hover:scale-[1.02]"
+            style={{
+              background: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${background})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center">Welcome to Dlog Tech</h1>
+            <p className="mt-2 text-center text-sm sm:text-base">
+              Please log in or sign up to continue.
+            </p>
+          </div>
 
-      {/* ส่วน Login / Register */}
-      <div className="w-full md:w-1/2 flex flex-col justify-center items-center bg-white p-6 md:p-10 transform transition duration-200 hover:scale-105">
-        {isLogin ? (
-          <>
-            <h2 className="text-2xl md:text-3xl font-bold text-orange-600 mb-6">
-              Login Account
-            </h2>
-            <form onSubmit={handleSubmit} className="w-full max-w-xs">
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white py-3 rounded-md font-semibold transition duration-200"
-              >
-                Login
-              </button>
-            </form>
-            <p
-              className="mt-4 text-orange-600 cursor-pointer"
-              onClick={toggleForm}
-            >
-              ยังไม่มีบัญชี? สมัครสมาชิก
-            </p>
-          </>
-        ) : (
-          <>
-            <h2 className="text-2xl md:text-3xl font-bold text-green-500 mb-6">
-              Register Account
-            </h2>
-            <form onSubmit={handleSubmit} className="w-full max-w-xs">
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  autoComplete="email"
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Address"
-                  value={address}
-                  onChange={(e) => setAddress(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="text"
-                  placeholder="Contact"
-                  value={contact}
-                  onChange={(e) => setContact(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <div className="mb-4">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-md font-semibold transition duration-200"
-              >
-                Register
-              </button>
-            </form>
-            <p
-              className="mt-4 text-orange-600 cursor-pointer"
-              onClick={toggleForm}
-            >
-              มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
-            </p>
-          </>
-        )}
-        {message && <p className="mt-4 text-red-500">{message}</p>}
+          {/* Login/Register Form - Full width on mobile, half on larger screens */}
+          <div className="w-full lg:w-1/2 flex flex-col justify-center items-center bg-white p-6 sm:p-8 lg:p-10 min-h-[400px] sm:min-h-[450px] lg:min-h-[500px] transform transition duration-200 hover:scale-[1.02]">
+            {isLogin ? (
+              <>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-orange-600 mb-4 sm:mb-6">
+                  Login Account
+                </h2>
+                <form onSubmit={handleSubmit} className="w-full max-w-xs sm:max-w-sm">
+                  <div className="mb-3 sm:mb-4">
+                    <input
+                      type="text"
+                      placeholder="Username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                    />
+                  </div>
+                  <div className="mb-3 sm:mb-4">
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                      className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 sm:py-3 rounded-md font-semibold transition duration-200"
+                  >
+                    Login
+                  </button>
+                </form>
+                <p
+                  className="mt-4 text-orange-600 cursor-pointer text-sm sm:text-base"
+                  onClick={toggleForm}
+                >
+                  ยังไม่มีบัญชี? สมัครสมาชิก
+                </p>
+              </>
+            ) : (
+              <>
+                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-500 mb-4 sm:mb-6">
+                  Register Account
+                </h2>
+                <form onSubmit={handleSubmit} className="w-full max-w-xs sm:max-w-sm">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="sm:col-span-2">
+                      <input
+                        type="text"
+                        placeholder="Username"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <input
+                        type="text"
+                        placeholder="Name"
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        required
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        autoComplete="email"
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <input
+                        type="text"
+                        placeholder="Address"
+                        value={address}
+                        onChange={(e) => setAddress(e.target.value)}
+                        required
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <input
+                        type="text"
+                        placeholder="Contact"
+                        value={contact}
+                        onChange={(e) => setContact(e.target.value)}
+                        required
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                    <div className="sm:col-span-2">
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full mt-3 sm:mt-4 bg-green-500 hover:bg-green-600 text-white py-2 sm:py-3 rounded-md font-semibold transition duration-200"
+                  >
+                    Register
+                  </button>
+                </form>
+                <p
+                  className="mt-4 text-orange-600 cursor-pointer text-sm sm:text-base"
+                  onClick={toggleForm}
+                >
+                  มีบัญชีอยู่แล้ว? เข้าสู่ระบบ
+                </p>
+              </>
+            )}
+            {message && <p className="mt-4 text-red-500 text-sm sm:text-base">{message}</p>}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-
   );
 }
 

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom"; // ใช้ navigate
+import { useNavigate } from "react-router-dom";
 import Nav from "../nav-bar/nav.jsx";
 import Footer from "../footer-page/footer.jsx";
 import { jwtDecode } from "jwt-decode";
@@ -73,9 +73,9 @@ export default function AppointmentForm() {
   const showPrivacyPolicy = () => {
     Swal.fire({
       title:
-        '<h2 style="font-size: 24px; font-weight: bold; color: #333;">นโยบายส่วนบุคคล</h2>',
+        '<h2 style="font-size: 20px; font-weight: bold; color: #333;">นโยบายส่วนบุคคล</h2>',
       html: `
-        <div style="text-align: center; font-size: 18px; line-height: 1.8; color: #555;">
+        <div style="text-align: center; font-size: 16px; line-height: 1.8; color: #555;">
           <p>เราให้ความสำคัญกับความเป็นส่วนตัวของข้อมูลลูกค้า <br>ข้อมูลที่คุณให้กับเราจะถูกนำไปใช้เพื่อให้บริการตามที่ร้องขอเท่านั้น</br></p>
           <p>ข้อมูลทั้งหมดจะถูกจัดเก็บในระบบที่ปลอดภัยและมีมาตรการป้องกันข้อมูลรั่วไหล</p>
           <p>หากคุณมีข้อสงสัยเกี่ยวกับนโยบายส่วนบุคคลของเรา <br>กรุณาติดต่อฝ่ายบริการลูกค้า</br></p>
@@ -213,17 +213,17 @@ export default function AppointmentForm() {
   return (
     <>
       <div
-        className="min-h-screen bg-cover bg-center "
+        className="min-h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/src/assets/background.png')" }}
       >
         <Nav />
         {loginFlag ? (
-          <div className="max-w-3xl mx-auto p-6 bg-white mt-2  rounded-lg shadow-3xl">
-            <div className="flex justify-center border-b mb-6">
+          <div className="max-w-3xl mx-auto p-3 sm:p-6 bg-white mt-2 rounded-lg shadow-xl">
+            <div className="flex justify-center border-b mb-4 sm:mb-6 overflow-hidden">
               <button
                 type="button"
                 onClick={() => setActiveTab("vehicle")}
-                className={`px-4 py-2 text-2xl font-bold focus:outline-none ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 text-base sm:text-lg md:text-2xl font-bold focus:outline-none ${
                   activeTab === "vehicle"
                     ? "border-b-4 border-red-600 text-red-600"
                     : "text-gray-600"
@@ -234,7 +234,7 @@ export default function AppointmentForm() {
               <button
                 type="button"
                 onClick={() => setActiveTab("appointment")}
-                className={`px-4 py-2 text-2xl font-bold focus:outline-none ${
+                className={`px-2 sm:px-4 py-1 sm:py-2 text-base sm:text-lg md:text-2xl font-bold focus:outline-none ${
                   activeTab === "appointment"
                     ? "border-b-4 border-red-600 text-red-600"
                     : "text-gray-600"
@@ -246,9 +246,9 @@ export default function AppointmentForm() {
 
             <form onSubmit={handleSubmit}>
               {activeTab === "vehicle" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
                   <div>
-                    <label className="block font-medium text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl">
                       ป้ายทะเบียน <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -256,12 +256,12 @@ export default function AppointmentForm() {
                       name="carPlate"
                       value={formData.carPlate}
                       onChange={handleChange}
-                      className="w-full border p-2 rounded-lg text-xl"
+                      className="w-full border p-2 rounded-lg text-base sm:text-lg"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block font-medium text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl">
                       ยี่ห้อ <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -269,12 +269,12 @@ export default function AppointmentForm() {
                       name="brand"
                       value={formData.brand}
                       onChange={handleChange}
-                      className="w-full border p-2 rounded-lg text-xl"
+                      className="w-full border p-2 rounded-lg text-base sm:text-lg"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block font-medium text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl">
                       รุ่น <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -282,12 +282,12 @@ export default function AppointmentForm() {
                       name="model"
                       value={formData.model}
                       onChange={handleChange}
-                      className="w-full border p-2 rounded-lg text-xl"
+                      className="w-full border p-2 rounded-lg text-base sm:text-lg"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block font-medium text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl">
                       ปี <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -295,12 +295,12 @@ export default function AppointmentForm() {
                       name="year"
                       value={formData.year}
                       onChange={handleChange}
-                      className="w-full border p-2 rounded-lg text-xl"
+                      className="w-full border p-2 rounded-lg text-base sm:text-lg"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block font-medium text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl">
                       เลขไมล์ <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -308,22 +308,22 @@ export default function AppointmentForm() {
                       name="mileage"
                       value={formData.mileage}
                       onChange={handleChange}
-                      className="w-full border p-2 rounded-lg text-xl"
+                      className="w-full border p-2 rounded-lg text-base sm:text-lg"
                       required
                     />
                   </div>
-                  <div className="flex justify-between mt-6 md:col-span-2">
+                  <div className="flex justify-between mt-4 sm:mt-6 md:col-span-2">
                     <button
                       type="button"
                       onClick={() => setActiveTab("customer")}
-                      className="bg-gray-600 text-white px-4 py-2 rounded-lg text-2xl transition duration-300 hover:bg-gray-700 shadow-md hover:shadow-lg"
+                      className="bg-gray-600 text-white px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-base sm:text-lg md:text-2xl transition duration-300 hover:bg-gray-700 shadow-md hover:shadow-lg"
                     >
                       กลับ
                     </button>
                     <button
                       type="button"
                       onClick={() => setActiveTab("appointment")}
-                      className="bg-red-600 text-white px-6 py-2 rounded-lg text-lg sm:text-2xl transition duration-300 hover:bg-red-700 shadow-md hover:shadow-lg"
+                      className="bg-red-600 text-white px-4 sm:px-6 py-1 sm:py-2 rounded-lg text-base sm:text-lg md:text-2xl transition duration-300 hover:bg-red-700 shadow-md hover:shadow-lg"
                     >
                       ถัดไป
                     </button>
@@ -332,29 +332,37 @@ export default function AppointmentForm() {
               )}
 
               {activeTab === "appointment" && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="md:col-span-1">
-                    <label className="block font-medium text-lg sm:text-xl">
+                <div className="flex flex-col gap-4">
+                  {/* Repair Type Section */}
+                  <div>
+                    <label className="block font-medium text-base sm:text-lg md:text-xl mb-2">
                       ประเภทงานซ่อม <span className="text-red-600">*</span>
                     </label>
-                    <div className="space-y-2 text-lg sm:text-xl">
+                    <div className="flex flex-col space-y-3">
                       {repairTypeList.map((item) => (
-                        <div key={item.value} className="flex items-center">
+                        <div key={item.value} className="flex items-start">
                           <input
                             type="checkbox"
+                            id={`repair-${item.value}`}
                             name="repairType"
                             value={item.value}
                             onChange={handleChange}
-                            className="mr-2 w-5 h-5"
+                            className="mr-2 mt-1 w-4 h-4"
                           />
-                          <span>{item.label}</span>
+                          <label 
+                            htmlFor={`repair-${item.value}`} 
+                            className="leading-tight"
+                          >
+                            {item.label}
+                          </label>
                         </div>
                       ))}
                     </div>
                   </div>
 
+                  {/* Appointment Date Section */}
                   <div>
-                    <label className="block font-medium text-lg sm:text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl mb-2">
                       วันที่นัดหมาย <span className="text-red-600">*</span>
                     </label>
                     <input
@@ -362,56 +370,66 @@ export default function AppointmentForm() {
                       name="appointmentDate"
                       value={formData.appointmentDate}
                       onChange={handleChange}
-                      className="w-full p-2 rounded-lg border text-lg sm:text-xl"
+                      className="w-full p-2 rounded-lg border text-sm sm:text-base md:text-lg"
                       required
-                      min={today} // Prevent past dates
+                      min={today}
                     />
                   </div>
 
+                  {/* Appointment Time Section */}
                   <div>
-                    <label className="block font-medium text-lg sm:text-xl">
+                    <label className="block font-medium text-base sm:text-lg md:text-xl mb-2">
                       เวลานัดหมาย <span className="text-red-600">*</span>
                     </label>
-                    <div className="space-y-2 text-lg sm:text-xl">
+                    <div className="flex flex-col space-y-3">
                       {["08:00", "10:00", "13:00"].map((time) => (
-                        <div key={time} className="flex items-center">
+                        <div key={time} className="flex items-start">
                           <input
                             type="radio"
+                            id={`time-${time}`}
                             name="appointmentTime"
                             value={time}
                             onChange={handleChange}
-                            className="mr-2 w-5 h-5"
+                            className="mr-2 mt-1 w-4 h-4"
                             required
                           />
-                          <span>{time}</span>
+                          <label 
+                            htmlFor={`time-${time}`} 
+                            className="leading-tight"
+                          >
+                            {time}
+                          </label>
                         </div>
                       ))}
                     </div>
                   </div>
 
-                  <div className="md:col-span-2">
-                    <label className="block font-medium text-lg sm:text-xl">
+                  {/* Additional Details Section */}
+                  <div>
+                    <label className="block font-medium text-base sm:text-lg md:text-xl mb-2">
                       บันทึกรายละเอียดงานซ่อมทั่วไปและอื่นๆ
                     </label>
                     <textarea
                       name="additionalDetails"
                       value={formData.additionalDetails}
                       onChange={handleChange}
-                      className="w-full p-2 rounded-lg border text-lg sm:text-xl"
-                      rows="4"
+                      className="w-full p-2 rounded-lg border text-sm sm:text-base md:text-lg"
+                      rows="3"
                     ></textarea>
                   </div>
 
-                  <div className="md:col-span-2 flex items-center text-lg sm:text-xl">
+                  {/* Privacy Policy Section */}
+                  <div className="flex items-start mt-2">
                     <input
                       type="checkbox"
+                      id="privacyPolicy"
                       name="privacyPolicy"
                       checked={formData.privacyPolicy}
                       onChange={handleChange}
-                      className="mr-2 w-5 h-5"
+                      className="mr-2 mt-1 w-4 h-4"
                       required
                     />
-                    <span>
+                    <label htmlFor="privacyPolicy" className="text-sm sm:text-base">
                       คุณได้อ่านและยอมรับ{" "}
                       <a
                         href="#"
@@ -421,20 +439,21 @@ export default function AppointmentForm() {
                         นโยบายส่วนบุคคล
                       </a>{" "}
                       ของเรา
-                    </span>
+                    </label>
                   </div>
 
-                  <div className="col-span-2 flex justify-between mt-6">
+                  {/* Button Section */}
+                  <div className="flex justify-between mt-4 sm:mt-6">
                     <button
                       type="button"
                       onClick={() => setActiveTab("vehicle")}
-                      className="bg-gray-600 text-white px-4 py-2 rounded-lg text-2xl transition duration-300 hover:bg-gray-700 shadow-md hover:shadow-lg"
+                      className="bg-gray-600 text-white px-3 sm:px-4 py-1 sm:py-2 rounded-lg text-base sm:text-lg md:text-2xl transition duration-300 hover:bg-gray-700 shadow-md hover:shadow-lg"
                     >
                       กลับ
                     </button>
                     <button
                       type="submit"
-                      className="bg-red-600 text-white px-6 py-2 rounded-lg text-lg sm:text-2xl transition duration-300 hover:bg-red-700 shadow-md hover:shadow-lg"
+                      className="bg-red-600 text-white px-4 sm:px-6 py-1 sm:py-2 rounded-lg text-base sm:text-lg md:text-2xl transition duration-300 hover:bg-red-700 shadow-md hover:shadow-lg"
                     >
                       ส่งข้อมูล
                     </button>

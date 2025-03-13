@@ -3,7 +3,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import Nav from "../nav-bar/nav";
 import Footer from "../footer-page/footer";
-import { FaEdit, FaTrashAlt } from "react-icons/fa"; // Use react-icons
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 export default function EditVehicle() {
   const [vehicles, setVehicles] = useState([]);
@@ -14,8 +14,8 @@ export default function EditVehicle() {
     model: "",
     year: "",
     miles: "",
-    vehicle_id: "", // vehicle_id is included for updating
-    user_id: "", // user_id is included for updating
+    vehicle_id: "",
+    user_id: "",
   });
 
   const navigate = useNavigate();
@@ -82,7 +82,6 @@ export default function EditVehicle() {
     });
   };
 
-  // Function to handle deleting a vehicle
   const handleDeleteVehicle = (vehicleId) => {
     Swal.fire({
       title: "คุณแน่ใจหรือไม่?",
