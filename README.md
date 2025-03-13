@@ -1,8 +1,17 @@
-# React + Vite
+# 🚗 Car Repair Booking System  
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A web-based car repair appointment system with real-time booking management.  
 
-Currently, two official plugins are available:
+## 📌 Features  
+- ✅ **Real-time appointment booking** for car repair services  
+- 🎨 **Responsive UI** built with **React.js** and **Tailwind CSS**  
+- ⚡ **RESTful API** powered by **Node.js** and **PostgreSQL**  
+- 💳 **Payment verification system** to track and confirm service payments  
+- 🔐 **User authentication** with login and registration functionality  
+- 📜 **Repair history module** to store past service records  
+- 💰 **Payment history tracking** for transaction management  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Tech Stack  
+- **Frontend:** React.js, Tailwind CSS  
+- **Backend:** Node.js, PostgreSQL  
+- **Authentication:** JWT  
