@@ -213,7 +213,7 @@ export default function AppointmentForm() {
   return (
     <>
       <div
-        className="min-h-screen bg-cover bg-center"
+        className="pt-24 md:pt-28 min-h-screen bg-cover bg-center"
         style={{ backgroundImage: "url('/src/assets/background.png')" }}
       >
         <Nav />
@@ -349,8 +349,8 @@ export default function AppointmentForm() {
                             onChange={handleChange}
                             className="mr-2 mt-1 w-4 h-4"
                           />
-                          <label 
-                            htmlFor={`repair-${item.value}`} 
+                          <label
+                            htmlFor={`repair-${item.value}`}
                             className="leading-tight"
                           >
                             {item.label}
@@ -393,8 +393,8 @@ export default function AppointmentForm() {
                             className="mr-2 mt-1 w-4 h-4"
                             required
                           />
-                          <label 
-                            htmlFor={`time-${time}`} 
+                          <label
+                            htmlFor={`time-${time}`}
                             className="leading-tight"
                           >
                             {time}
@@ -429,7 +429,10 @@ export default function AppointmentForm() {
                       className="mr-2 mt-1 w-4 h-4"
                       required
                     />
-                    <label htmlFor="privacyPolicy" className="text-sm sm:text-base">
+                    <label
+                      htmlFor="privacyPolicy"
+                      className="text-sm sm:text-base"
+                    >
                       คุณได้อ่านและยอมรับ{" "}
                       <a
                         href="#"

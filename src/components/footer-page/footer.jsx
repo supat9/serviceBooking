@@ -12,38 +12,38 @@ function Footer() {
       <div className="container mx-auto">
         <p className="font-bold text-1xl text-gray">Dlog-Tech &copy; 2024</p>
         <p className="mt-2">
-          นวัตกรรมการขับขี่ | Quick Shifter |{" "}
+          นวัตกรรมการขับขี่  Quick Shifter 
           <br />
         {hasPermission && (
           <>
             <Link to="/repairOrder" className="text-gray-300 hover:underline">
-              Repair Order
+              แก้ไขสถานะการซ่อม
             </Link>
             {" | "}
             <Link to="/editUser" className="text-gray-300 hover:underline">
-              EditUser
+              จัดการข้อมูลผู้ใช้
             </Link>
             {" | "}
             <Link to="/editVehicle" className="text-gray-300 hover:underline">
-              EditVehicle
+            จัดการข้อมูลรถ
             </Link>
             {" | "}
             <Link to="/editService" className="text-gray-300 hover:underline">
-              EditService
+            จัดการการบริการ
             </Link>
             {" | "}
             <Link to="/editAppointment" className="text-gray-300 hover:underline">
-              EditAppointment
+            จัดการการนัดหมาย
             </Link>
             {" | "}
             <Link to="/addBill" className="text-gray-300 hover:underline">
-              AddBill
+            จัดการการเรียกเก็บเงิน
             </Link>
           </>
         )}
         </p>
         <p className="mt-2">
-          ที่อยู่: Tanon Songpol Alley, ตำบลลำพยา อำเภอเมืองนครปฐม นครปฐม 73000
+          ที่อยู่ : Tanon Songpol Alley, ตำบลลำพยา อำเภอเมืองนครปฐม นครปฐม 73000
         </p>
       </div>
     </footer>
