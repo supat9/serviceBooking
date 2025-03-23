@@ -263,7 +263,7 @@ export default function EditUser() {
   };
 
   const handleAddNewUser = () => {
-    navigate("/register"); // ไปยังหน้าสมัครสมาชิก หรือแก้ไขตามความเหมาะสม
+    navigate("/login");
   };
 
   const getRoleBadgeClass = (role) => {

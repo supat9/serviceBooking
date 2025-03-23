@@ -36,7 +36,12 @@ export default function EditService() {
       userData.permission === "customer" ||
       userData.permission === "mechanic"
     ) {
-      Swal.fire("Error", "ไม่สามารถเข้าถึงหน้านี้ได้", "error").then(() => {
+      Swal.fire({
+        title: "ไม่มีสิทธิ์เข้าถึง",
+        text: "ไม่สามารถเข้าถึงหน้านี้ได้",
+        icon: "error",
+        confirmButtonText: "กลับหน้าหลัก",
+      }).then(() => {
         navigate("/#home");
       });
       return;
@@ -332,14 +337,14 @@ export default function EditService() {
                 <table className="min-w-full table-auto border-collapse">
                   <thead>
                     <tr className="bg-gray-100 text-left text-gray-600 text-sm">
-                      <th className="px-6 py-3 border-b border-gray-200">Service ID</th>
-                      <th className="px-6 py-3 border-b border-gray-200">Vehicle ID</th>
-                      <th className="px-6 py-3 border-b border-gray-200">ประเภทบริการ</th>
-                      <th className="px-6 py-3 border-b border-gray-200">รายละเอียด</th>
-                      <th className="px-6 py-3 border-b border-gray-200">สถานะ</th>
-                      <th className="px-6 py-3 border-b border-gray-200">เวลาบริการ</th>
-                      <th className="px-6 py-3 border-b border-gray-200">วันที่บริการ</th>
-                      <th className="px-6 py-3 border-b border-gray-200">การดำเนินการ</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service ID</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Vehicle ID</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ประเภทบริการ</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รายละเอียด</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">สถานะ</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">เวลาบริการ</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">วันที่บริการ</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">การดำเนินการ</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">

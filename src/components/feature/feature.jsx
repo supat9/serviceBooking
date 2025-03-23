@@ -6,7 +6,7 @@ function Feature() {
           <h2 className="mb-6 text-4xl font-bold text-black">FOLLOW US</h2>
           
           {/* Social media links - centered on mobile, left-aligned on larger screens */}
-          <div className="flex flex-col items-center md:items-start">
+          <div className="flex flex-col ml-3 md:items-start">
             <h2 className="mb-8 mt-5 flex text-3xl font-bold text-black items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +99,8 @@ function Feature() {
           </div>
         </div>
 
-        <div className="text-left lg:w-1/2 w-full px-6">
+        <div className="text-left lg:w-1/2 w-full px-6 ">
+        
           <h1 className="mb-6 text-4xl font-bold text-black">LOCATION</h1>
           <p className="text-black text-xl mb-4">
             Tanon Songpol Alley, ตำบลลำพยา อำเภอเมืองนครปฐม นครปฐม 73000

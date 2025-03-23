@@ -13,7 +13,7 @@ export default function AddBill() {
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
-  // ดึงข้อมูลใบแจ้งหนี้ทั้งหมด
+  // Fetch all repair orders
   const fetchBills = async () => {
     try {
       setLoading(true);
@@ -34,7 +34,7 @@ export default function AddBill() {
     }
   };
 
-  // ดึงรายการ service จาก database
+  // Fetch services from database
   const fetchServices = async () => {
     try {
       const res = await fetch("http://localhost:3000/repairOrder/getServices", {
@@ -54,14 +54,13 @@ export default function AddBill() {
     fetchServices();
   }, []);
 
-  // อัปเดตค่าฟอร์ม
+  // Update form values
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  // เพิ่มใบแจ้งหนี้
+  // Add new repair order
   const handleAdd = async () => {
-    // ตรวจสอบความถูกต้องของข้อมูล
     if (!form.service_id || !form.cost) {
       Swal.fire("กรุณากรอกข้อมูล", "โปรดระบุรหัสบริการและราคา", "warning");
       return;
@@ -95,10 +94,9 @@ export default function AddBill() {
     }
   };
 
-  // ลบใบแจ้งหนี้
+  // Delete repair order
   const handleDelete = async (order_id) => {
     try {
-      // ยืนยันการลบ
       const result = await Swal.fire({
         title: "ยืนยันการลบ",
         text: "คุณต้องการลบรายการนี้ใช่หรือไม่?",
@@ -133,13 +131,13 @@ export default function AddBill() {
     }
   };
 
-  // เริ่มแก้ไขข้อมูล
+  // Start editing
   const handleEdit = (bill) => {
     setEditingId(bill.order_id);
     setEditForm({ ...bill });
   };
 
-  // บันทึกการแก้ไข
+  // Save edits
   const handleSaveEdit = async () => {
     if (!editForm.service_id || !editForm.cost) {
       Swal.fire("กรุณากรอกข้อมูล", "โปรดระบุรหัสบริการและราคา", "warning");
@@ -175,12 +173,12 @@ export default function AddBill() {
     }
   };
 
-  // ยกเลิกการแก้ไข
+  // Cancel editing
   const cancelEdit = () => {
     setEditingId(null);
   };
 
-  // กรองข้อมูลตามคำค้นหา
+  // Filter bills by search term
   const filteredBills = bills.filter(
     (bill) =>
       bill.order_id.toString().includes(searchTerm) ||
@@ -190,200 +188,204 @@ export default function AddBill() {
 
   return (
     <>
-      <div
-        className="pt-24 md:pt-28 min-h-screen bg-gray-50"
-        style={{ backgroundImage: "url('/src/assets/background.png')" }}
-      >
-        <Nav />
-        <div className="container mx-auto px-4 py-8">
-          <div className="bg-white rounded-xl shadow-lg p-6 mb-8">
-            <h2 className="text-3xl font-bold mb-6 text-center text-gray-800 border-b pb-2">
-              ระบบจัดการข้อมูลค่าบริการ
-            </h2>
+    <div className="bg-gray-50 min-h-screen" style={{ backgroundImage: "url('/src/assets/background.png')" }}>
+      <Nav />
+      <div className="container mx-auto px-4 py-8 pt-24 md:pt-28">
+        <div className="bg-white rounded-lg shadow-md overflow-hidden">
+          {/* Header */}
+          <div className="p-6 border-b border-gray-200">
+            <h2 className="text-2xl text-center font-bold text-gray-800">ระบบจัดการข้อมูลค่าบริการ</h2>
+          </div>
 
-            {/* ฟอร์มเพิ่มใบแจ้งหนี้ */}
-            <div className="bg-gray-50 p-6 rounded-lg shadow-md mb-6 border border-gray-200">
-              <h3 className="text-xl font-semibold mb-4 text-gray-700 flex items-center">
-                <FaPlus className="mr-2" /> เพิ่มรายการค่าบริการใหม่
-              </h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">รหัสบริการ</label>
-                  <select
-                    name="service_id"
-                    value={form.service_id}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-3 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
-                  >
-                    <option value="">-- เลือกรหัสบริการ --</option>
-                    {services.map((service) => (
-                      <option key={service.service_id} value={service.service_id}>
-                        {service.service_id}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">ค่าใช้จ่าย (บาท)</label>
-                  <input
-                    type="number"
-                    name="cost"
-                    placeholder="ระบุค่าใช้จ่าย"
-                    value={form.cost}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-3 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">รายละเอียด</label>
-                  <input
-                    type="text"
-                    name="bill_desc"
-                    placeholder="ระบุรายละเอียด"
-                    value={form.bill_desc}
-                    onChange={handleChange}
-                    className="border border-gray-300 p-3 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
-                  />
-                </div>
+          {/* Add Form */}
+          <div className="p-6 bg-white border-b border-gray-200">
+            
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">รหัสบริการ</label>
+                <select
+                  name="service_id"
+                  value={form.service_id}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="">-- เลือกรหัสบริการ --</option>
+                  {services.map((service) => (
+                    <option key={service.service_id} value={service.service_id}>
+                      {service.service_id}
+                    </option>
+                  ))}
+                </select>
               </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ค่าใช้จ่าย (บาท)</label>
+                <input
+                  type="number"
+                  name="cost"
+                  placeholder="ระบุค่าใช้จ่าย"
+                  value={form.cost}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+              
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">รายละเอียด</label>
+                <input
+                  type="text"
+                  name="bill_desc"
+                  placeholder="ระบุรายละเอียด"
+                  value={form.bill_desc}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                />
+              </div>
+            </div>
+            
+            <div className="mt-4 flex justify-end">
               <button
                 onClick={handleAdd}
-                className="mt-4 bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors duration-300 flex items-center justify-center w-full md:w-auto md:ml-auto"
+                className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md flex items-center transition-colors duration-200"
               >
                 <FaPlus className="mr-2" /> เพิ่มรายการ
               </button>
             </div>
+          </div>
 
-            {/* ค้นหา */}
-            <div className="flex items-center mb-6">
-              <div className="relative flex-grow">
-                <input
-                  type="text"
-                  placeholder="ค้นหาด้วยรหัสหรือคำอธิบาย..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="border border-gray-300 p-3 pl-10 rounded-md w-full focus:ring-blue-500 focus:border-blue-500"
-                />
-                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-              </div>
-            </div>
-
-            {/* ตารางแสดงใบแจ้งหนี้ */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200">
-                  <thead className="bg-gray-800 text-white">
-                    <tr>
-                      <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">รหัสออเดอร์</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">รหัสบริการ</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">ค่าใช้จ่าย (บาท)</th>
-                      <th className="px-6 py-3 text-left text-sm font-semibold uppercase tracking-wider">รายละเอียด</th>
-                      <th className="px-6 py-3 text-center text-sm font-semibold uppercase tracking-wider">จัดการ</th>
-                    </tr>
-                  </thead>
-                  <tbody className="bg-white divide-y divide-gray-200">
-                    {loading ? (
-                      <tr>
-                        <td colSpan="5" className="text-center py-8">
-                          <div className="flex justify-center items-center">
-                            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blue-500"></div>
-                            <span className="ml-2">กำลังโหลดข้อมูล...</span>
-                          </div>
-                        </td>
-                      </tr>
-                    ) : filteredBills.length === 0 ? (
-                      <tr>
-                        <td colSpan="5" className="text-center py-8 text-gray-500">
-                          ไม่พบข้อมูลรายการค่าบริการ
-                        </td>
-                      </tr>
-                    ) : (
-                      filteredBills.map((bill) => (
-                        <tr key={bill.order_id} className="hover:bg-gray-50">
-                          {editingId === bill.order_id ? (
-                            <>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                {bill.order_id}
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <input
-                                  type="text"
-                                  value={editForm.service_id}
-                                  onChange={(e) =>
-                                    setEditForm({ ...editForm, service_id: e.target.value })
-                                  }
-                                  className="border border-gray-300 p-2 rounded-md w-24"
-                                />
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <input
-                                  type="number"
-                                  value={editForm.cost}
-                                  onChange={(e) =>
-                                    setEditForm({ ...editForm, cost: e.target.value })
-                                  }
-                                  className="border border-gray-300 p-2 rounded-md w-24"
-                                />
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap">
-                                <input
-                                  type="text"
-                                  value={editForm.bill_desc}
-                                  onChange={(e) =>
-                                    setEditForm({ ...editForm, bill_desc: e.target.value })
-                                  }
-                                  className="border border-gray-300 p-2 rounded-md w-48"
-                                />
-                              </td>
-                              <td className="px-6 py-4 whitespace-nowrap text-center">
-                                <button
-                                  onClick={handleSaveEdit}
-                                  className="text-blue-600 hover:text-blue-800 mr-2"
-                                >
-                                  <FaSave />
-                                </button>
-                                <button
-                                  onClick={cancelEdit}
-                                  className="text-red-600 hover:text-red-800"
-                                >
-                                  <FaTrashAlt />
-                                </button>
-                              </td>
-                            </>
-                          ) : (
-                            <>
-                              <td className="px-6 py-4 whitespace-nowrap">{bill.order_id}</td>
-                              <td className="px-6 py-4 whitespace-nowrap">{bill.service_id}</td>
-                              <td className="px-6 py-4 whitespace-nowrap">{bill.cost}</td>
-                              <td className="px-6 py-4 whitespace-nowrap">{bill.bill_desc}</td>
-                              <td className="px-6 py-4 whitespace-nowrap text-center">
-                                <button
-                                  onClick={() => handleEdit(bill)}
-                                  className="text-blue-600 hover:text-blue-800 mr-2"
-                                >
-                                  <FaEdit />
-                                </button>
-                                <button
-                                  onClick={() => handleDelete(bill.order_id)}
-                                  className="text-red-600 hover:text-red-800"
-                                >
-                                  <FaTrashAlt />
-                                </button>
-                              </td>
-                            </>
-                          )}
-                        </tr>
-                      ))
-                    )}
-                  </tbody>
-                </table>
-              </div>
+          {/* Search */}
+          <div className="px-6 py-4 bg-gray-50">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="ค้นหาด้วยรหัสหรือคำอธิบาย..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full border border-gray-300 rounded-md shadow-sm p-2 pl-10 focus:ring-blue-500 focus:border-blue-500"
+              />
+              <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
             </div>
           </div>
+
+          {/* Table */}
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-100">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รหัสออเดอร์</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รหัสบริการ</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ค่าใช้จ่าย (บาท)</th>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">รายละเอียด</th>
+                  <th scope="col" className="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">จัดการ</th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {loading ? (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-4 text-center">
+                      <div className="flex justify-center items-center">
+                        <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-blue-500"></div>
+                        <span className="ml-2 text-gray-500">กำลังโหลดข้อมูล...</span>
+                      </div>
+                    </td>
+                  </tr>
+                ) : filteredBills.length === 0 ? (
+                  <tr>
+                    <td colSpan="5" className="px-6 py-4 text-center text-gray-500">
+                      ไม่พบข้อมูลรายการค่าบริการ
+                    </td>
+                  </tr>
+                ) : (
+                  filteredBills.map((bill) => (
+                    <tr key={bill.order_id} className="hover:bg-gray-50">
+                      {editingId === bill.order_id ? (
+                        <>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            {bill.order_id}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <input
+                              type="text"
+                              value={editForm.service_id}
+                              onChange={(e) =>
+                                setEditForm({ ...editForm, service_id: e.target.value })
+                              }
+                              className="border border-gray-300 rounded-md shadow-sm p-1 text-sm w-24"
+                            />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <input
+                              type="number"
+                              value={editForm.cost}
+                              onChange={(e) =>
+                                setEditForm({ ...editForm, cost: e.target.value })
+                              }
+                              className="border border-gray-300 rounded-md shadow-sm p-1 text-sm w-24"
+                            />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <input
+                              type="text"
+                              value={editForm.bill_desc}
+                              onChange={(e) =>
+                                setEditForm({ ...editForm, bill_desc: e.target.value })
+                              }
+                              className="border border-gray-300 rounded-md shadow-sm p-1 text-sm w-full"
+                            />
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <button
+                              onClick={handleSaveEdit}
+                              className="text-blue-500 hover:text-blue-700 p-1"
+                              title="บันทึก"
+                            >
+                              <FaSave />
+                            </button>
+                            <button
+                              onClick={cancelEdit}
+                              className="text-red-500 hover:text-red-700 p-1 ml-2"
+                              title="ยกเลิก"
+                            >
+                              <FaTrashAlt />
+                            </button>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{bill.order_id}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{bill.service_id}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{bill.cost}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{bill.bill_desc}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-center">
+                            <button
+                              onClick={() => handleEdit(bill)}
+                              className="text-blue-500 hover:text-blue-700 p-1"
+                              title="แก้ไข"
+                            >
+                              <FaEdit />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(bill.order_id)}
+                              className="text-red-500 hover:text-red-700 p-1 ml-2"
+                              title="ลบ"
+                            >
+                              <FaTrashAlt />
+                            </button>
+                          </td>
+                        </>
+                      )}
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <Footer />
       </div>
+      
+    </div>
+    <Footer />
     </>
   );
 }

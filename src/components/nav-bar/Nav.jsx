@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import { HashLink as Link } from "react-router-hash-link";
 import { FaUserCircle, FaBars, FaTimes } from "react-icons/fa"; // Import icons
 import Swal from "sweetalert2";
+import useScrollSpy from "./useScrollSpy"; // Import our ScrollSpy hook
 
 export default function Nav() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userData, setUserData] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { activeSection } = useScrollSpy(); // Use our ScrollSpy hook
 
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
@@ -48,6 +50,16 @@ export default function Nav() {
     });
   };
 
+  // Navigation items with proper paths
+  const navItems = [
+    { name: "Home", path: "/#home", id: "home" },
+    { name: "News", path: "/#news", id: "news" },
+    { name: "Contact Us", path: "/#contact", id: "contact" },
+    { name: "Service", path: "/services", id: "services" },
+    { name: "Track Service", path: "/TrackServices", id: "track" },
+    { name: "Payment", path: "/payment", id: "payment" },
+  ];
+
   return (
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-500 ${
@@ -68,22 +80,21 @@ export default function Nav() {
 
         {/* Desktop/Tablet Menu with hover animations */}
         <ul className="hidden lg:flex lg:flex-row space-x-6 xl:space-x-8 flex-grow justify-center">
-          {[
-            { name: "Home", path: "/#home" },
-            { name: "News", path: "/#news" },
-            { name: "Contact Us", path: "/#contact" },
-            { name: "Service", path: "/services" },
-            { name: "Track Service", path: "/TrackServices" },
-            { name: "Payment", path: "/payment" },
-          ].map((item, index) => (
+          {navItems.map((item, index) => (
             <li key={index} className="group">
               <Link
                 smooth
                 to={item.path}
-                className="relative text-white font-bold transition-colors duration-300 group-hover:text-orange-400"
+                className={`relative font-bold transition-colors duration-300 group-hover:text-orange-400 ${
+                  activeSection === item.id ? "text-orange-400" : "text-white"
+                }`}
               >
                 {item.name}
-                <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-orange-400 transition-all duration-300 group-hover:w-full"></span>
+                <span 
+                  className={`absolute left-0 bottom-0 h-0.5 bg-orange-400 transition-all duration-300 ${
+                    activeSection === item.id ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                ></span>
               </Link>
             </li>
           ))}
@@ -126,7 +137,9 @@ export default function Nav() {
           <Link
             smooth
             to="/#home"
-            className="text-white hover:text-orange-400 transition-colors duration-300"
+            className={`transition-colors duration-300 ${
+              activeSection === "home" ? "text-orange-400" : "text-white hover:text-orange-400"
+            }`}
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -215,31 +228,29 @@ export default function Nav() {
 
           {/* Menu items with fade-in animation */}
           <ul className="flex flex-col items-center space-y-6 mt-10">
-            {[
-              { name: "Home", path: "/#home", delay: "100" },
-              { name: "News", path: "/#news", delay: "200" },
-              { name: "Contact Us", path: "/#contact", delay: "300" },
-              { name: "Service", path: "/services", delay: "400" },
-              { name: "Track Service", path: "/TrackServices", delay: "500" },
-              { name: "Payment", path: "/payment", delay: "600" },
-            ].map((item, index) => (
-              <li 
-                key={index} 
-                className="transform translate-y-4 opacity-0 animate-fadeInUp"
-                style={{ 
-                  animationDelay: `${item.delay}ms`,
-                  animationFillMode: "forwards" 
-                }}
-              >
-                <Link
-                  to={item.path}
-                  className="block text-white hover:text-orange-400 font-bold transition-colors duration-300"
-                  onClick={() => setIsOpen(false)}
+            {navItems.map((item, index) => {
+              const delay = (index + 1) * 100;
+              return (
+                <li 
+                  key={index} 
+                  className="transform translate-y-4 opacity-0 animate-fadeInUp"
+                  style={{ 
+                    animationDelay: `${delay}ms`,
+                    animationFillMode: "forwards" 
+                  }}
                 >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
+                  <Link
+                    to={item.path}
+                    className={`block font-bold transition-colors duration-300 ${
+                      activeSection === item.id ? "text-orange-400" : "text-white hover:text-orange-400"
+                    }`}
+                    onClick={() => setIsOpen(false)}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              );
+            })}
 
             {/* Profile + Logout (Mobile/Tablet) */}
             {isLoggedIn ? (

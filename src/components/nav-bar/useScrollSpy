@@ -1,0 +1,49 @@
+import { useState, useEffect } from "react";
+
+export default function useScrollSpy() {
+  const [activeSection, setActiveSection] = useState(null);
+
+  useEffect(() => {
+    const sections = ["home", "news", "contact"];
+    
+    const handleScroll = () => {
+      // Get the current scroll position
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+      
+      // Find the section that is currently visible
+      let currentSection = null;
+      
+      sections.forEach((sectionId) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const { offsetTop, offsetHeight } = element;
+          
+          // Check if the section is in the viewport
+          if (
+            scrollPosition >= offsetTop && 
+            scrollPosition < offsetTop + offsetHeight
+          ) {
+            currentSection = sectionId;
+          }
+        }
+      });
+      
+      if (currentSection !== activeSection) {
+        setActiveSection(currentSection);
+      }
+    };
+    
+    // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
+    
+    // Call once on mount to set initial active section
+    handleScroll();
+    
+    // Cleanup
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [activeSection]);
+  
+  return { activeSection };
+}
